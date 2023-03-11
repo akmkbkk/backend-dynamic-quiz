@@ -1,5 +1,8 @@
 package com.aprajapati.dynamicquiz.controller;
 
+import com.aprajapati.dynamicquiz.reader.CatalogueFileReader;
+import com.aprajapati.dynamicquiz.reader.QuestionsSheetReader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -7,56 +10,19 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class QuizController {
 
+    @Autowired
+    CatalogueFileReader indexFileReader;
+
+    @Autowired
+    QuestionsSheetReader sheetReader;
+
     @GetMapping("/getFileData/{fileName}")
     public String getFileData(@PathVariable("fileName") String fileName ){
-        String res = "[\n" +
-                "      {\n" +
-                "      \"question\":\"What is the Capital of UK?\",\n" +
-                "      \"answers\":[{\n" +
-                "        \"optionKey\":\"A\",\n" +
-                "        \"optionVal\":\"London\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"optionKey\":\"B\",\n" +
-                "        \"optionVal\":\"Yorkshire\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"optionKey\":\"C\",\n" +
-                "        \"optionVal\":\"Hampton\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"optionKey\":\"D\",\n" +
-                "        \"optionVal\":\"Livingston\"\n" +
-                "      }],\n" +
-                "      \"correctOptionKey\":\"A\",\n" +
-                "      \"correctAnsExplain\":\"London is the Capital of UK since 1654\",\n" +
-                "      \"marks\":5\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"question\":\"What is the Capital of India?\",\n" +
-                "      \"answers\":[{\n" +
-                "        \"optionKey\":\"A\",\n" +
-                "        \"optionVal\":\"Kanpur\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"optionKey\":\"B\",\n" +
-                "        \"optionVal\":\"Kolkata\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"optionKey\":\"C\",\n" +
-                "        \"optionVal\":\"New Delhi\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"optionKey\":\"D\",\n" +
-                "        \"optionVal\":\"Mumbai\"\n" +
-                "      }],\n" +
-                "      \"correctOptionKey\":\"C\",\n" +
-                "      \"correctAnsExplain\":\"Kolkata was the Capital of British India, New Delhi is the current capital of India\",\n" +
-                "      \"marks\":5\n" +
-                "    }\n" +
-                "  \n" +
-                "  ]";
+        return sheetReader.getQuestionsSheetAsJson(fileName);
+    }
 
-        return res;
+    @GetMapping("/getIndex")
+    public String getFileData(){
+        return indexFileReader.readCatalogueFile("C:\\Soft\\Git\\dynamicquiz-files\\catalogue\\DST_Sheets_index.csv");
     }
 }

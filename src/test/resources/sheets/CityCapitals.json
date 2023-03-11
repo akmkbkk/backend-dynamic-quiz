@@ -1,0 +1,37 @@
+[{
+  "question": "What is the Capital of UK?",
+  "answers": [{
+    "optionKey": "A",
+    "optionVal": "London"
+  }, {
+    "optionKey": "B",
+    "optionVal": "Yorkshire"
+  }, {
+    "optionKey": "C",
+    "optionVal": "Hampton"
+  }, {
+    "optionKey": "D",
+    "optionVal": "Livingston"
+  }],
+  "correctOptionKey": "A",
+  "correctAnsExplain": "London is the Capital of UK since 1654",
+  "marks": 5
+}, {
+  "question": "What is the Capital of India?",
+  "answers": [{
+    "optionKey": "A",
+    "optionVal": "Kanpur"
+  }, {
+    "optionKey": "B",
+    "optionVal": "Kolkata"
+  }, {
+    "optionKey": "C",
+    "optionVal": "New Delhi"
+  }, {
+    "optionKey": "D",
+    "optionVal": "Mumbai"
+  }],
+  "correctOptionKey": "C",
+  "correctAnsExplain": "Kolkata was the Capital of British India, New Delhi is the current capital of India",
+  "marks": 5
+}]
