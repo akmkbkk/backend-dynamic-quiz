@@ -1,17 +1,24 @@
 package com.aprajapati.dynamicquiz.reader;
 
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
 public class QuestionsSheetReaderTest {
 
     @Test
-    public void testSimple(){
+    public void testSimple() throws ParseException {
         QuestionsSheetReader reader = new QuestionsSheetReader();
+        reader.sheetFormatExtension = ".json";
+        reader.sheetsRootDir = "C:\\Soft\\Git\\dynamicquiz\\src\\test\\resources\\sheets";
+        String result = reader.getQuestionsSheetAsJson("CityCapitals");
+
         JSONParser parser = new JSONParser();
         String expected = "[\n" +
                 "      {\n" +
@@ -61,14 +68,12 @@ public class QuestionsSheetReaderTest {
                 "  \n" +
                 "  ]";
 
-        String result = reader.getQuestionsSheetAsJson("C:\\Soft\\Git\\dynamicquiz\\src\\test\\resources\\sheets\\CityCapitals.json");
+        JSONArray expectedArr = (JSONArray)parser.parse(expected);
+
+
 
         assertNotNull(result);
-        try{
-            assertEquals(parser.parse(expected),parser.parse(result));
-        }catch (Exception e){
-            log.error(e.getLocalizedMessage());
-        }
+        assertEquals(expectedArr,parser.parse(result));
 
     }
 

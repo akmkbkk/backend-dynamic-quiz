@@ -3,6 +3,7 @@ package com.aprajapati.dynamicquiz.reader;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -12,8 +13,11 @@ import java.io.FileReader;
 @Slf4j
 public class QuestionsSheetReader {
 
-    private String sheetFormatExtension = ".json";
-    private String sheetsRootDir = "C:\\Soft\\Git\\dynamicquiz-files\\sheets\\";
+    @Value("${reader.questions.formatextension}")
+    protected String sheetFormatExtension;
+
+    @Value("${reader.questions.rootdir}")
+    protected String sheetsRootDir;
 
     public String getQuestionsSheetAsJson(String sheetName){
         sheetName = sheetsRootDir+File.separator+sheetName+sheetFormatExtension;
